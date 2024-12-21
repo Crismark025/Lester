@@ -1,125 +1,67 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
 body {
-  line-height: 1.6;
-  background: linear-gradient(to bottom, #fdfcfb, #e2dede); /* Subtle gradient for a classic look */
-  background-attachment: fixed; /* Makes the background stationary while scrolling */
-  background-size: cover;
-  font-family: "Poppins", serif;
-}
-
-h1 {
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  margin: 40px 0 60px 0;
-  color: #333; /* Classic dark text for contrast */
-}
-
-form {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #37ad09, #0f9906); /* Blue gradient */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
-}
-
-#search-input {
-  width: 60%;
-  max-width: 600px; /* Make the input field wider */
-  padding: 12px 20px;
-  border: 1px solid #d0d0d0; /* Subtle border for classic style */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  font-size: 18px;
-  color: #333;
-  background-color: #fafafa; /* Light background for contrast */
-}
-
-#search-button {
-  padding: 12px 20px;
-  background-color: #556b2f; /* Classic olive green for a timeless look */
-  color: #fff;
-  border: none;
-  font-size: 18px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  border-radius: 5px;
-  margin-left: 10px;
-  transition: background-color 0.3s ease-in-out;
-}
-
-#search-button:hover {
-  background-color: #3e4c24; /* Darker green on hover */
-}
-
-.search-results {
-  display: flex;
-  justify-content: space-around; /* Create equal spacing */
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 20px auto; /* Add some spacing above and below */
-  gap: 20px; /* Add spacing between items */
-}
-
-.search-result {
-  width: 30%; /* Adjust width for better layout */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  background-color: #fff; /* Classic white background */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.search-result:hover {
-  transform: scale(1.05); /* Slight zoom on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.search-result img {
-  width: 100%;
-  height: auto; /* Maintain aspect ratio */
-  object-fit: cover;
-}
-
-.search-result a {
-  font-size: 16px;
-  text-decoration: none;
-  color: #333;
-  display: block;
-  padding: 10px;
-  text-transform: capitalize;
-  background-color: #fafafa; /* Subtle off-white for a classic feel */
+  height: 100vh;
   text-align: center;
+  color: #f7f7f7; /* Light text for contrast */
+}
+
+/* Header */
+h1 {
+  font-size: 3.5rem;
   font-weight: bold;
+  color: #ffffff; /* White color for the heading */
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-#show-more-button {
-  background-color: #556b2f; /* Classic olive green */
-  font-size: 18px;
+/* Button Styling */
+button {
+  background-color: #32cd32; /* Vibrant green */
+  color: white;
+  font-size: 1.3rem;
+  padding: 18px 28px;
   border: none;
-  color: #fff;
-  padding: 12px 24px;
-  text-align: center;
-  display: block;
-  margin: 30px auto;
-  border-radius: 5px;
+  border-radius: 50px; /* More rounded corners */
   cursor: pointer;
-  display: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 25px; /* More space below the button */
 }
 
-#show-more-button:hover {
-  background-color: #3e4c24; /* Darker green on hover */
+button:hover {
+  background-color: #228b22; /* Darker green on hover */
+  transform: scale(1.07);
 }
 
-@media screen and (max-width: 768px) {
-  .search-results {
-    padding: 10px;
+/* Image Styling */
+img {
+  width: 350px;
+  height: 350px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+
+/* Image Fade-In Effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  .search-result {
-    width: 45%; /* Adjust width for smaller screens */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .search-result {
-    width: 100%; /* Full-width for very small screens */
+  100% {
+    opacity: 1;
   }
 }
