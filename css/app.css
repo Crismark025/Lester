@@ -1,67 +1,182 @@
-/* Global Reset */
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
-/* Body Styling */
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #4e73df, #1c1c88); /* Blue gradient */
+  position: relative;
+  background-color: #f7f7f7; /* Lighter background for better contrast */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* Centers the content horizontally */
+  align-items: flex-start; /* Keeps content aligned from the top */
+  min-height: 100vh; /* Ensures the content stretches the full height of the screen */
+  flex-direction: column; /* Allows content to stack vertically */
+  padding-top: 70px; /* To offset the fixed navbar height */
+  background-color: rgb(29, 28, 28);
+}
+
+/* Global Container */
+.obj-width {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Navbar */
+nav {
+  background-color: #2a2a2c; /* Softer shade of purple */
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+  padding: 0.8rem 1.5rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
-  text-align: center;
-  color: #f7f7f7; /* Light text for contrast */
 }
 
-/* Header */
-h1 {
-  font-size: 3.5rem;
-  font-weight: bold;
-  color: #ffffff; /* White color for the heading */
-  margin-bottom: 30px;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+.navbar .logo {
+  color: #ff9900;
+  text-decoration: none;
+  letter-spacing: 2px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
-/* Button Styling */
-button {
-  background-color: #32cd32; /* Vibrant green */
-  color: white;
-  font-size: 1.3rem;
-  padding: 18px 28px;
-  border: none;
-  border-radius: 50px; /* More rounded corners */
+
+.navbar .logo:hover {
+  color: #ffc400;
+}
+
+#search-input {
+  width: 700px;
+  padding: 10px 20px;
+  border: 2px solid #fdad00;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #404040;
+  outline: none;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+#search-input:focus {
+  border-color: #fdad00;
+}
+
+#search-button {
+  padding: 10px 20px;
+  background-color: #fdad00;
+  color: #ffffff;
+  font-size: 18px;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 25px; /* More space below the button */
+  border-radius: 5px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
 }
 
-button:hover {
-  background-color: #228b22; /* Darker green on hover */
-  transform: scale(1.07);
+#search-button:hover {
+  background-color: #ffc400;
 }
 
-/* Image Styling */
-img {
-  width: 350px;
-  height: 350px;
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  animation: fadeIn 2s ease forwards;
+/* Blog Section */
+#bolg-container {
+  padding: 6rem 0 3rem; /* Added padding for spacing below navbar */
+  display: flex;
+  justify-content: center; /* Centers the cards horizontally */
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem; /* Improved spacing between blog cards */
+  width: 100%;
+  max-width: 1200px; /* Maximum width for the content */
+  margin: 0 auto; /* Ensures that the container is centered */
 }
 
-/* Image Fade-In Effect */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
+.blog-card {
+  width: 280px;
+  border: 1px solid #fdad00;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.blog-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.blog-card h2 {
+  color: #333;
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.blog-card p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Media Query for Smaller Screens */
+@media(max-width: 768px) {
+  .navbar .logo {
+      font-size: 1.8rem;
   }
-  100% {
-    opacity: 1;
+
+  #search-input {
+      width: 100%;
+      padding: 12px;
+  }
+
+  #search-button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+  }
+
+  .blog-card {
+      width: 45%; /* Adjust width for mid-size screens */
+  }
+}
+
+@media(max-width: 500px) {
+  .navbar .logo {
+      font-size: 1.6rem;
+  }
+
+  #search-input {
+      width: 100%;
+      padding: 12px;
+  }
+
+  #search-button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+  }
+
+  .blog-card {
+      width: 100%; /* Full width for small screens */
+      height: 400px; /* Slightly taller for better layout */
   }
 }
