@@ -1,82 +1,51 @@
-const apiKey = '47b78e2ce7ce4831b755130e953f4121'; // Make sure your API key is kept secure
+const accessKey = "kjkslzPtjeoG8skz2RVhOHrE9e3hfmYb_QWTtsg4IuI";
 
-// Using "blog-container" as the ID for the container
-const blogContainer = document.getElementById("blog-container");
-const searchField = document.getElementById("search-input");
-const searchButton = document.getElementById("search-button");
+const formEl = document.querySelector("form");
+const inputEl = document.getElementById("search-input");
+const searchResults = document.querySelector(".search-results");
+const showMore = document.getElementById("show-more-button");
 
-async function fetchRandomNews() {
-    try {
-        // Corrected the URL by using backticks for template literals
-        const apiURL = `https://newsapi.org/v2/top-headlines?sources=techcrunch&pageSize=9&apikey=${apiKey}`;
-        const response = await fetch(apiURL);
-        const data = await response.json();
-        return data.articles;
-    } catch (error) {
-        console.error("Error fetching random News", error);
-        return [];
+let inputData = "";
+let page = 1;
+
+async function searchImages() {
+   inputData = inputEl.value;
+  const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputData}&client_id=${accessKey}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const results = data.results;
+
+    if (page === 1 ) {
+      searchResults.innerHTML = "";
+    }
+    results.map((result) => {
+      const imageWrapper = document.createElement('div');
+      imageWrapper.classList.add("search-result");
+      const image = document.createElement('img');
+      image.src = result.urls.small;
+      image.alt = result.alt_description;
+      const imageLink = document.createElement("a");
+      imageLink.href = result.links.html;
+      imageLink.target = "_blank";
+      imageLink.textContent = result.alt_description;
+
+      imageWrapper.appendChild(image);
+      imageWrapper.appendChild(imageLink);
+      searchResults.appendChild(imageWrapper);
+
+    });
+
+    page++;
+    if(page > 1) {
+      showMore.style.display = "block";
     }
 }
 
-searchButton.addEventListener("click", async () => {
-    const query = searchField.value.trim();
-    if (query !== "") {
-        try {
-            const articles = await fetchNewsQuery(query);
-            displayBlogs(articles);
-        } catch (error) {
-            console.error("Error fetching News for query", error);
-        }
-    }
+formEl.addEventListener("submit", (event) =>{
+  event.preventDefault();
+  page = 1;
+  searchImages();
 });
 
-async function fetchNewsQuery(query) {
-    try {
-        // Corrected the URL by using backticks for template literals
-        const apiURL = `https://newsapi.org/v2/everything?q=${query}&pageSize=9&apikey=${apiKey}`;
-        const response = await fetch(apiURL);
-        const data = await response.json();
-        return data.articles;
-    } catch (error) {
-        console.error("Error fetching News for query", error);
-        return [];
-    }
-}
-
-function displayBlogs(articles) {
-    // Using "blogContainer" to clear the content of the container
-    blogContainer.innerHTML = "";
-
-    articles.forEach((article) => {
-        const blogCard = document.createElement("div");  // Fixed typo here (blogCArd -> blogCard)
-        blogCard.classList.add("blog-card");
-
-        const img = document.createElement("img");
-        img.src = article.urlToImage;
-        img.alt = article.title;
-
-        const title = document.createElement("h2");
-        title.textContent = article.title;  // Fixed typo: 'text' to 'title'
-
-        const description = document.createElement("p");  // Fixed typo: 'desctription' to 'description'
-        description.textContent = article.description;  // Fixed typo: 'desctription' to 'description'
-
-        blogCard.appendChild(img);
-        blogCard.appendChild(title);
-        blogCard.appendChild(description);
-        blogContainer.appendChild(blogCard);  // Append the blog card to the blogContainer
-        blogCard.addEventListener('click', () => {
-            window.open(article.url, "_blank");
-        });
-    });
-}
-
-// Immediately invoked function expression (IIFE)
-(async () => {
-    try {
-        const articles = await fetchRandomNews();
-        displayBlogs(articles);  // Display the articles in the blogContainer
-    } catch (error) {
-        console.error("Error fetching random News", error);
-    }
-})();
